@@ -31,7 +31,7 @@ HOMEWORK_VERDICTS = {
 
 
 def check_tokens():
-    """Проверяем наличие всех токенов. В случае отсутсвия останавливаем бот"""
+    """Проверяем наличие всех токенов. В случае отсутсвия останавливаем бот."""
     logging.info('Проверка наличия всех токенов')
     env_vars = {
         'PRACTICUM_TOKEN': PRACTICUM_TOKEN,
@@ -49,7 +49,7 @@ def check_tokens():
 
 
 def send_message(bot, message):
-    """Отправляет сообщение в телеграмм"""
+    """Отправляет сообщение в телеграмм."""
     logging.debug('Попытка отправки сообщения')
     try:
         logging.debug('Сообщение отправлено')
@@ -64,9 +64,9 @@ def send_message(bot, message):
 
 
 def get_api_answer(timestamp):
-    """Отправляем запрос к API, получаем статус работы и страницы"""
+    """Отправляем запрос к API, получаем статус работы и страницы."""
     timestamp = timestamp or int(time.time())
-    params = {'from_date': 1664628017}
+    params = {'from_date': timestamp}
     homework_status = {
         "url": ENDPOINT,
         "headers": HEADERS,
@@ -87,7 +87,7 @@ def get_api_answer(timestamp):
 
 
 def check_response(response):
-    """Проверка ответа API на соответствие документации"""
+    """Проверка ответа API на соответствие документации."""
     logging.info('Проверка ответа API на корректность')
     if not isinstance(response, dict):
         raise TypeError('Ответ API не является словарем')
@@ -103,7 +103,7 @@ def check_response(response):
 
 
 def parse_status(homework):
-    """Извлекает статус домашней работы и возвращает подготовленную строку"""
+    """Извлекает статус домашней работы и возвращает подготовленную строку."""
     logging.info('Проверяем статус работы')
     if 'homework_name' not in homework:
         raise KeyError('Нет ключа homework_name в ответе API')
